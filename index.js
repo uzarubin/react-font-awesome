@@ -1,11 +1,9 @@
-/** @jsx React.DOM*/
 /**
  * Created by laiff on 03.09.14.
  */
 'use strict';
 
 var React = require('react/addons');
-var dom = React.DOM;
 
 function createIcon(type) {
     var iconType = type;
@@ -28,10 +26,8 @@ function createIcon(type) {
             classes['fa-align-' + this.props.align] = this.props.align;
 
             var className = cs(classes) + " " + (this.props.className || '');
-
-            return this.transferPropsTo(
-                dom.i({className: className}, this.props.children)
-                );
+            
+            return (<i className={className} {...this.props}>{this.props.children}</i>);
         }
     });
 }
@@ -41,14 +37,12 @@ var IconStack = React.createClass({
         var cs = React.addons.classSet;
         var classes = {
             'fa-stack': true
-        }
+        };
         classes['fa-' + this.props.size] = this.props.size;
 
         var className = cs(classes) + " " + (this.props.className || '');
-
-        return this.transferPropsTo(
-            dom.span({className: className}, this.props.children)
-            );
+    
+        return (<span className={className} {...this.props}>{this.props.children}</span>);
     }
 });
 
@@ -57,12 +51,10 @@ var Ul = React.createClass({
         var cs = React.addons.classSet;
         var classes = {
             'fa-ul': true
-        }
+        };
         var className = cs(classes) + " " + (this.props.className || '');
-
-        return this.transferPropsTo(
-            dom.ul({className: className}, this.props.children)
-            );
+        
+        return (<ul className={className} {...this.props}>{this.props.children}</ul>);
     }
 });
 
@@ -72,7 +64,7 @@ var Animate = React.createClass({
     getInitialState: function () {
         return {
             childCount: 0,
-            child: (dom.span({}, null))
+            child:(<span/>)
         };
     },
     componentWillMount: function () {
